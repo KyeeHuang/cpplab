@@ -1,0 +1,8 @@
+*/*
+!*.cc
+!*.h
+!*.hpp
+!*.cpp
+!*.c
+!*.md
+!*/unique_ptr
