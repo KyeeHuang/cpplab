@@ -1,4 +1,4 @@
-#ifdef STACK_ALLOC_H
+#ifndef STACK_ALLOC_H
 #define STACK_ALLOC_H
 
 #include <memory>

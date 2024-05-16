@@ -38,3 +38,29 @@ public:
   }
   
 };
+
+// compare_exchange_strong
+template <typename T>
+bool _compare_exchange_strong(T &expected, T desired) {
+  std::lock_guard<std::mutex> guard(m_lock);
+  if (m_val == expected) 
+    return m_val = desired, true;
+  else
+    return expected = m_val, false;
+}
+
+// actual in funciton
+int foo(std::atomic<int> & a) {
+  int e = 42;
+  a.compare_exchange_strong(e, e+1);
+  return a.load();
+}
+
+/* x86-64 -O2 compile:
+foo (std::atomic<int>&):
+  movl $42, %eax
+  movl $43, %edx
+  lock cmpxchgl %edx, (%rdi) # %rdi is the first param in function
+  movl (%rdi), %eax
+  ret
+*/
