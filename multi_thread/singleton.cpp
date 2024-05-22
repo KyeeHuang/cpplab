@@ -3,6 +3,7 @@
 #include <thread>
 #include <atomic>
 #include <mutex>
+#include <bits/stdc++.h>
 
 // unsafe
 class Singleton {
